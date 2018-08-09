@@ -1,38 +1,58 @@
 #drum-machine {
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 100vw;
+  justify-content: space-around;
+  align-items: center;
+  font-family: monospace;
+  width: 100%;
   height: 100vh;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  box-sizing: border-box;
 }
 
 .drum-rack {
   display: flex;
   flex-basis: row wrap;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
   margin: 0 auto;
-  width: 100%;
-  height: 100%;
+  height: 110px;
 }
 
 .drum-pad {
   border: 1px solid black;
   flex-grow: 1;
-  background: url(/static/media/drum-pad-transparent.cd0e307c.png) no-repeat center;
-  background-size: contain;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100px;
+  margin: 2px;
+  cursor: pointer;
 }
 
-.drum-pad p {
-  position: absolute;
+.drum-pad > p {
   z-index: 100;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
   color: white;
   font-size: 2.5em;
+  transition: ease-in .2ms background-color;
+  border-radius: 50%;
+  width: 90px;
+  line-height: 90px;
+  text-align: center;
+  vertical-align: center;
+  background-color: none;
+  user-select: none; 
+  pointer-events: none;
+}
+
+.drum-pad > p.hit {
+  opacity: .75;
+  color: black;
+  background-color: yellow;
+}
+
+#display {
+  height: 50px;
+  user-select: none; 
 }

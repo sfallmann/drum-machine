@@ -7,7 +7,13 @@ const DrumRack = (props) => {
     <section className="drum-rack">
       {
         props.drumPads.map((pad, i) => {
-          return <DrumPad key={`pad_${i}`} {...pad} />
+          return (
+            <DrumPad 
+              key={`pad_${i}`} 
+              {...pad} 
+              handleClick={props.handleClick}
+            />
+          )
         })
       }
     </section>

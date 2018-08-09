@@ -40,35 +40,94 @@ console.log(drumRacks);
 class App extends Component {
   constructor(props){
     super(props);
+
     this.props = props;
     this.handleOnKeyDown = this.handleOnKeyDown.bind(this);
+    this.handleClick = this.handleClick.bind(this);
 
     this.state = {
-      drumRacks
+      drumRacks,
+      displayText: ''
     }
   }
 
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleOnKeyDown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleOnKeyDown);
+  }
+
+  displayPadHit(key) {
+
+    let displayText = document.querySelector(`[id^="${key}"]`).id
+    this.setState(() => ({displayText}));
+
+    let p = document.getElementById(`${key}-text`);
+    p.classList.add('hit');
+
+    setTimeout(() => {
+      p.classList.remove('hit');
+    }, 250)
+  }
+
+  playPadAudio(key) {
+
+    let audio = document.getElementById(`${key}`);
+    audio.currentTime = 0;
+    audio.play();
+
+  }
+
+  handleClick(e) {
+
+    let key = e.target.querySelector('p').id.replace('-text', '');
+    this.handleHit(key);
+  }
+
+
+  handleHit(key) {
+    this.displayPadHit(key);
+    this.playPadAudio(key);
+
+  }
+
   handleOnKeyDown(e) {
+
+    if(!e.key) return;
+
     let validKeys = ['Q','W','E','A','S','D','Z','X','C'];
     let key = e.key.toUpperCase();
 
     if (validKeys.indexOf(key) < 0) return;
-    let audio = document.querySelector(`#${key} audio`);
-    audio.load();
-    audio.play();
-    console.log(audio);
+
+    this.handleHit(key);
+    
   }
 
   render() {
 
     return (
-      <div id="drum-machine" onKeyDown={this.handleOnKeyDown} tabIndex={1}>
-        {
-          drumRacks.map((rack, i) => {
-            return <DrumRack key={`rack_${i}`} drumPads={rack.drumPads}/>
-          })
-        }
-      </div>   
+      <div id="drum-machine" onKeyDown={this.handleOnKeyDown}>
+        <div>
+          {
+            this.state.drumRacks.map((rack, i) => {
+              return (
+                <DrumRack 
+                  key={`rack_${i}`} 
+                  drumPads={rack.drumPads} 
+                  keyPressed={this.state.keyPressed} 
+                  handleClick={this.handleClick}
+                />
+              )
+            })
+          }
+        </div>
+        <section id="control-panel">
+          <h3 id="display">{this.state.displayText}</h3>
+        </section>
+      </div>
     );
   }
 }
