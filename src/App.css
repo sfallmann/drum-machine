@@ -1,3 +1,6 @@
+body {
+  background-color: #E8E9EB;
+}
 #drum-machine {
   display: flex;
   flex-direction: column;
@@ -29,13 +32,14 @@
   width: 100px;
   margin: 2px;
   cursor: pointer;
+  border-radius: 50%;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .drum-pad > p {
   z-index: 100;
   color: white;
   font-size: 2.5em;
-  transition: ease-in .2ms background-color;
   border-radius: 50%;
   width: 90px;
   line-height: 90px;
@@ -47,12 +51,45 @@
 }
 
 .drum-pad > p.hit {
-  opacity: .75;
   color: black;
-  background-color: yellow;
+  background-color: #E4B363;
 }
 
 #display {
-  height: 50px;
+  color: #E4B363;
   user-select: none; 
+  background-color: #E4B363;
+  border: 4px ridge #313638;
+  border-radius: 30px;
+  text-align: center;
+  width: 250px;
+  line-height: 50px;
+  min-height: 50px;
+  font-size: 1.75em;
+}
+
+/* Animations */
+
+@keyframes hitPad {
+  0% {
+    background-color: none;
+  }
+  100% {
+    background-color: #E4B363;
+  }
+}
+
+@keyframes fadeDisplay {
+  0% {
+    color: #E4B363;
+  }
+  20% {
+    color: black;
+  }
+  80% {
+    color: black;
+  }  
+  100% {
+    color: #E4B363;
+  }  
 }

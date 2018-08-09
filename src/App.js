@@ -59,17 +59,38 @@ class App extends Component {
     document.removeEventListener('keydown', this.handleOnKeyDown);
   }
 
+  clearAnimation(el) {
+    Object.assign(el.style, {
+      animationDuration: '',
+      animationName: ''
+    });
+    el.removeEventListener("animationend", this.clearAnimation.bind(this, el));
+  }
+
+  setAnimation(el, animationName, animationDuration) {
+    Object.assign(el.style, {
+      animationDuration,
+      animationName
+    });
+  }
+
   displayPadHit(key) {
 
     let displayText = document.querySelector(`[id^="${key}"]`).id
     this.setState(() => ({displayText}));
 
     let p = document.getElementById(`${key}-text`);
-    p.classList.add('hit');
+    let display = document.getElementById('display');
 
-    setTimeout(() => {
-      p.classList.remove('hit');
-    }, 250)
+    this.clearAnimation(p);
+    this.clearAnimation(display);
+
+    this.setAnimation(p, 'hitPad', '.1s');
+    this.setAnimation(display, 'fadeDisplay', '.5s');
+
+    p.addEventListener("animationend", this.clearAnimation.bind(this, p));
+    display.addEventListener("animationend", this.clearAnimation.bind(this, display));
+    
   }
 
   playPadAudio(key) {
