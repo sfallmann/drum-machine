@@ -48,6 +48,8 @@ class App extends Component {
   displayPadHit(key) {
 
     let displayText = document.querySelector(`[id^="${key}"]`).id
+    displayText = displayText.replace(`${key}-`, '');
+    
     this.setState(() => ({displayText}));
 
     let p = document.getElementById(`${key}-text`);
