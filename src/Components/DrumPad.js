@@ -7,7 +7,7 @@ const DrumPad = (props) => {
     <div 
       className="drum-pad" 
       id={`${props.text}-${props.name}`}
-      onClick={props.handleClick}
+      onClick={props.handlePadClick}
       style={{
           background: `url(${drumImg}) no-repeat center`,
           backgroundSize: "contain"

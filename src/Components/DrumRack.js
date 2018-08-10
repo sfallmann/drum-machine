@@ -11,7 +11,7 @@ const DrumRack = (props) => {
             <DrumPad 
               key={`pad_${i}`} 
               {...pad} 
-              handleClick={props.handleClick}
+              handlePadClick={props.handlePadClick}
             />
           )
         })

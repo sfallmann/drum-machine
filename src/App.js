@@ -1,41 +1,10 @@
 import React, { Component } from 'react';
-import  DrumRack from './Components/DrumRack';
-import kits from './audio';
+import DrumRack from './Components/DrumRack';
+import PowerButton from './Components/PowerButton';
+import soundbank from './sound-bank';
 import './App.css';
 
-const drumRacks = [
-  {
-    drumPads: [
-      { text: 'Q'},
-      { text: 'W'},
-      { text: 'E'}
-    ]
-  },
-  {
-    drumPads: [
-      { text: 'A'},
-      { text: 'S'},
-      { text: 'D'}
-    ]
-  },
-  {
-    drumPads: [
-      { text: 'Z'},
-      { text: 'X'},
-      { text: 'C'}
-    ]
-  }        
-]
 
-drumRacks.forEach((rack, rackIndex) => {
-  rack.drumPads.forEach((pad, padIndex) => {
-    let index = padIndex + (3 * rackIndex);
-    pad.sound = kits.acousticKit[index].file;
-    pad.name = kits.acousticKit[index].name;
-  })
-});
-
-console.log(drumRacks);
 
 class App extends Component {
   constructor(props){
@@ -43,11 +12,13 @@ class App extends Component {
 
     this.props = props;
     this.handleOnKeyDown = this.handleOnKeyDown.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handlePadClick = this.handlePadClick.bind(this);
+    this.handlePowerBtnClick = this.handlePowerBtnClick.bind(this);
 
     this.state = {
-      drumRacks,
-      displayText: ''
+      drumRacks: soundbank.acousticKit,
+      displayText: '',
+      power: true
     }
   }
 
@@ -101,7 +72,13 @@ class App extends Component {
 
   }
 
-  handleClick(e) {
+  handlePowerBtnClick() {
+    this.setState((prevState) =>({power: !prevState.power}));
+  }
+
+  handlePadClick(e) {
+
+    if (!this.state.power) return;
 
     let key = e.target.querySelector('p').id.replace('-text', '');
     this.handleHit(key);
@@ -116,7 +93,7 @@ class App extends Component {
 
   handleOnKeyDown(e) {
 
-    if(!e.key) return;
+    if(!e.key || !this.state.power) return;
 
     let validKeys = ['Q','W','E','A','S','D','Z','X','C'];
     let key = e.key.toUpperCase();
@@ -139,13 +116,14 @@ class App extends Component {
                   key={`rack_${i}`} 
                   drumPads={rack.drumPads} 
                   keyPressed={this.state.keyPressed} 
-                  handleClick={this.handleClick}
+                  handlePadClick={this.handlePadClick}
                 />
               )
             })
           }
         </div>
         <section id="control-panel">
+          <PowerButton handlePowerBtnClick={this.handlePowerBtnClick} power={this.state.power} />
           <h3 id="display">{this.state.displayText}</h3>
         </section>
       </div>
