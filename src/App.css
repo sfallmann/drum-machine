@@ -55,6 +55,28 @@ body {
   background-color: #E4B363;
 }
 
+.power-btn-img {
+  border-radius: 50%;
+  background-color: red;
+  user-select: none; 
+}
+
+.power {
+  background-color: lightgreen;
+}
+
+#powerbutton:hover {
+  cursor: pointer;
+}
+
+#powerbutton > p {
+  font-size: 1.25em;
+  font-weight: bold;
+  user-select: none; 
+}
+
+
+
 #display {
   color: #E4B363;
   user-select: none; 

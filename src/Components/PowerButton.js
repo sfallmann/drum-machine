@@ -1,16 +1,17 @@
 import React from 'react';
+import buttonImg from '../img/power-button.png';
 
 const PowerButton = (props) => {
-
-  let className = props.power ? 'power-on' : '';
+  console.log(props.power)
+  let className = props.power ? 'power-btn-img power' : 'power-btn-img';
 
   return (
     <div 
       id="powerbutton" 
-      className={className}
       onClick={props.handlePowerBtnClick}
     >
-      {props.power ? 'Power On' : 'Power Off'}
+      <p>POWER</p>
+      <img src={buttonImg} className={className} alt="power button"/>
     </div>
   )
 }
