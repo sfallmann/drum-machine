@@ -49,7 +49,7 @@ class App extends Component {
 
     let displayText = document.querySelector(`[id^="${key}"]`).id
     displayText = displayText.replace(`${key}-`, '');
-    
+
     this.setState(() => ({displayText}));
 
     let p = document.getElementById(`${key}-text`);
@@ -110,7 +110,7 @@ class App extends Component {
 
     return (
       <div id="drum-machine" onKeyDown={this.handleOnKeyDown}>
-        <div>
+        <div className="drum-racks-wrapper">
           {
             this.state.drumRacks.map((rack, i) => {
               return (

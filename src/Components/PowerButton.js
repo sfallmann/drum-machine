@@ -11,7 +11,11 @@ const PowerButton = (props) => {
       onClick={props.handlePowerBtnClick}
     >
       <p>POWER</p>
-      <img src={buttonImg} className={className} alt="power button"/>
+      <div>
+        <img src={buttonImg} className={className} alt="power button"/>
+        <h3>SPF-1000 Drum Machine</h3>
+      </div>
+      
     </div>
   )
 }

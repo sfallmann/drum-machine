@@ -1,5 +1,5 @@
 body {
-  background-color: #E8E9EB;
+  background-color: #CA9764;
 }
 #drum-machine {
   display: flex;
@@ -10,6 +10,11 @@ body {
   width: 100%;
   height: 100vh;
   box-sizing: border-box;
+}
+
+.drum-racks-wrapper {
+  border: 4px groove #654A89; 
+  background-color: #443458;
 }
 
 .drum-rack {
@@ -52,17 +57,26 @@ body {
 
 .drum-pad > p.hit {
   color: black;
-  background-color: #E4B363;
+  background-color: #8AB65A;
 }
 
 .power-btn-img {
   border-radius: 50%;
   background-color: red;
   user-select: none; 
+  display: inline-block;
 }
 
 .power {
   background-color: lightgreen;
+}
+
+#powerbutton > div > h3 {
+  display: inline-block;
+  width: 200px;
+  text-align: center;
+  margin: 0 0 3px 0;
+  user-select: none; 
 }
 
 #powerbutton:hover {
@@ -78,9 +92,9 @@ body {
 
 
 #display {
-  color: #E4B363;
+  color: #A4E85B;
   user-select: none; 
-  background-color: #E4B363;
+  background-color: #A4E85B;
   border: 4px ridge #313638;
   border-radius: 30px;
   text-align: center;
@@ -97,13 +111,13 @@ body {
     background-color: none;
   }
   100% {
-    background-color: #E4B363;
+    background-color: #8AB65A;
   }
 }
 
 @keyframes fadeDisplay {
   0% {
-    color: #E4B363;
+    color: #A4E85B;
   }
   20% {
     color: black;
@@ -112,6 +126,6 @@ body {
     color: black;
   }  
   100% {
-    color: #E4B363;
+    color: #A4E85B;
   }  
 }
